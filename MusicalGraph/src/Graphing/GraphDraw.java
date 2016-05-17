@@ -99,7 +99,7 @@ public class GraphDraw extends PApplet {
 				
 		  } 
 		  else if (theEvent.isController()) {
-			  //figure out what kind of search user wants
+			 //figure out what kind of search user wants
 			println("event from controller : "+theEvent.getController().getValue()+" from "+theEvent.getController());
 		    if(theEvent.getController().getName() == "traverseGraph"){
 		    	int index = (int)theEvent.getController().getValue();
@@ -205,9 +205,9 @@ public class GraphDraw extends PApplet {
   public void playSound(String chords){
 	    if(flag == 1){
 			 OscMessage myOscMessage = new OscMessage("/chuckReceives");
-		      // add a value to the OscMessage - name of chord clicked
+		     // add a value to the OscMessage - name of chord clicked
 			 myOscMessage.add(chords);
-		      // send the OscMessage to a remote location specified in myNetAddress
+		     // send the OscMessage to a remote location specified in myNetAddress
 		     oscP5.send(myOscMessage, myBroadcastLocation);
 		     //change flag to 0 till positive message is received from chuck
 		     //this ensures no new sound is played till current audio is over
