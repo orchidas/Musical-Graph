@@ -40,7 +40,7 @@ public class GraphDraw extends PApplet {
 	DropdownList dlist;
 	
 		
-	// Run this project as Java application and this
+    // Run this project as Java application and this
     // method will launch the sketch
     public static void main(String[] args) {
         String[] a = {"MAIN"};
@@ -61,7 +61,7 @@ public class GraphDraw extends PApplet {
 		oscP5 = new OscP5(this, oscServerPortReceive);
 		//used for sending osc messages
 		myBroadcastLocation = new NetAddress(oscServer, oscServerPortSend);
-	    //controlp5 object - for adding interactivity
+	    	//controlp5 object - for adding interactivity
 		cp5 = new ControlP5(this);
 		dlist = cp5.addDropdownList("traverseGraph").setPosition(40,20);
 		customize(dlist);
@@ -94,13 +94,13 @@ public class GraphDraw extends PApplet {
 	//control event generated when we use DDlist/ textfield
 	public void controlEvent(ControlEvent theEvent) {
 		  if (theEvent.isGroup()) {
-		    // check if the Event was triggered from a ControlGroup
-			println("event from group : "+theEvent.getGroup().getValue()+" from "+theEvent.getGroup());
+		      // check if the Event was triggered from a ControlGroup
+		      println("event from group : "+theEvent.getGroup().getValue()+" from "+theEvent.getGroup());
 				
 		  } 
 		  else if (theEvent.isController()) {
-			 //figure out what kind of search user wants
-			println("event from controller : "+theEvent.getController().getValue()+" from "+theEvent.getController());
+		    //figure out what kind of search user wants
+		    println("event from controller : "+theEvent.getController().getValue()+" from "+theEvent.getController());
 		    if(theEvent.getController().getName() == "traverseGraph"){
 		    	int index = (int)theEvent.getController().getValue();
 		    	switch(index){
@@ -138,7 +138,7 @@ public class GraphDraw extends PApplet {
 			text(chordName, xBase-12, yBase+5);
 			//create Location specific to each node
 			vertexLocation.put(chordName,new Location(xBase,yBase));
-		    xBase += (int) ((int)50*sin((float) (TWO_PI/24.0*i)));
+		    	xBase += (int) ((int)50*sin((float) (TWO_PI/24.0*i)));
 			yBase +=(int) ((int)50*cos((float) (TWO_PI/24.0*i)));
 		}
 	}
@@ -198,15 +198,15 @@ public class GraphDraw extends PApplet {
  		//should be "/chuckSends" + chordName
  		println(pattern + " " + chordPlayed);
  		// disable all buttons, clear text fields too
- 	    int pos = chords.indexOf(chordPlayed);
- 	    buttons[pos] = true;
+ 	    	int pos = chords.indexOf(chordPlayed);
+ 	    	buttons[pos] = true;
    }   
 			
   public void playSound(String chords){
 	    if(flag == 1){
-			 OscMessage myOscMessage = new OscMessage("/chuckReceives");
+	             OscMessage myOscMessage = new OscMessage("/chuckReceives");
 		     // add a value to the OscMessage - name of chord clicked
-			 myOscMessage.add(chords);
+		     myOscMessage.add(chords);
 		     // send the OscMessage to a remote location specified in myNetAddress
 		     oscP5.send(myOscMessage, myBroadcastLocation);
 		     //change flag to 0 till positive message is received from chuck
@@ -230,21 +230,21 @@ public class GraphDraw extends PApplet {
 	   if(chords.contains(start) && chords.contains(goal) && searchType != ""){
 		    println("Valid arguments, starting search");
 	   	    List<String> exploredNodes = new ArrayList<String>();
-	        if(searchType == "BFS")
-		   		exploredNodes = g.bfs(start, goal);
-	   		else if(searchType == "DFS")
-		   		exploredNodes = g.dfs(start,  goal);
+	            if(searchType == "BFS")
+		   	exploredNodes = g.bfs(start, goal);
+	   	    else if(searchType == "DFS")
+		  	exploredNodes = g.dfs(start,  goal);
 	   		println("The search returned");
 	   		String toPlay ="";
 	   		for(String node:exploredNodes){
 		   		print(node + "\t");
 		   		toPlay += node + " ";	   
-	   		}
-	   		playSound(toPlay);
-	  		//reset parameters so function is not called continuously by draw()
-	   		searchType ="";
-	   		goal ="";
-	   		start = "";
+	   	}
+	   	playSound(toPlay);
+	  	//reset parameters so function is not called continuously by draw()
+	   	searchType ="";
+	   	goal ="";
+	   	start = "";
    	   }
    }
 }
